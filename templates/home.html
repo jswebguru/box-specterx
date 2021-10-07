@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,29 +5,12 @@
 </head>
 <body>
     <div id="container">
-        <h1 style="color: #017ebc">Welcome</h1>
-        <button type="button" id="submit_button">Get Data</button>
-        <p>User ID: <span id="user_id"></span></p>
-        <p>File ID: <span id="file_id"></span></p>
+        <p>User ID: {{ user_id }}</p>
+        <p>File ID: {{ file_id }}</p>
     </div>
 </body>
 </html>
 <script src="/static/js/jquery/jquery.js"></script>
-<script>
-    $('#submit_button').click(function (){
-        $.post('/api/get_data/',
-            function (result) {
-                {#if (result === 'Positive'){#}
-                {#    document.getElementById('result').style.color = 'crimson'#}
-                {# else {#}
-                {#    document.getElementById('result').style.color = 'black'#}
-                {##}
-                document.getElementById('user_id').innerHTML = result.user_id;
-                document.getElementById('file_id').innerHTML = result.file_id;
-        })
-    })
-
-</script>
 <style>
     #container {
         margin-top: 100px;
