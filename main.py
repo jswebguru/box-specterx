@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import requests
 
 app = Flask(__name__)
 
@@ -20,9 +21,12 @@ def get_result():
 
 @app.route("/gdrive/", methods=['Get'])
 def get_meta_data():
-    data = request
+    user_id = requests.get('user_id')
+    file_id = requests.get('file_ids')
 
-    return data
+    result = {'file_id': file_id, 'user_id': user_id}
+
+    return result
 
 
 # if __name__ == '__main__':
