@@ -2,7 +2,7 @@
 
 ## Install Dependencies 
 ```command
-    git clone https://github.com/jswebguru/nlp_CheckFeedback.git
+    git clone https://github.com/jswebguru/box-specterx.git
     python3 -m pip install -r requirements.txt
 ```
 
