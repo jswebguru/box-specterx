@@ -17,11 +17,11 @@
                     <li>File Name: {{ x.folder_file_name }} <a href={{ x.file_download_url }}>Download</a></li>
                 </ul>
             {% endfor %}
-            <button id="folder_download">Download Folder</button>
+            <button id="folder_download">Download All Files</button>
             <p id="download_result"></p>
         {% else %}
             <p>User Name: {{ user_name }}</p>
-            <p>File ID: <span id="file_id">{{ file_id }}</span></p>
+            <p>File ID: {{ file_id }}</p>
             <p>File Name: {{ file_name }}</p>
             <p>File Size: {{ file_size }}</p>
             <p>File Owner Name: {{ file_owner_name }}</p>
@@ -34,7 +34,8 @@
 <script src="/static/js/jquery/jquery.js"></script>
 <script>
     $('#folder_download').click(function (){
-        let folder_id = $('#folder_id').val()
+        const folder_id = $('#folder_id').value
+        console.log(folder_id);
         $.post('/api/folder_download/',
             {
                 folder_id: folder_id
