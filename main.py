@@ -17,10 +17,10 @@ def get_result():
     return result
 
 
-@app.route("/gdrive/", methods=['Get'])
+@app.route("/gdrive/", methods=['POST'])
 def get_meta_data():
-    user_id = requests.get('user_id')
-    file_id = requests.get('file_ids')
+    user_id = request.form['user_id']
+    file_id = request.form['file_ids']
 
     result.append({'file_id': file_id, 'user_id': user_id})
 
