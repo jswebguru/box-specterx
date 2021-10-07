@@ -17,7 +17,7 @@ def get_result():
     return result
 
 
-@app.route("/gdrive/", methods=['POST'])
+@app.route("/box/", methods=['POST'])
 def get_meta_data():
     user_id = request.form['user_id']
     file_id = request.form['file_ids']
