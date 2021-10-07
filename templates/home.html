@@ -5,11 +5,24 @@
 </head>
 <body>
     <div id="container">
-        <p>User Name: {{ user_name }}</p>
-        <p>File Name: {{ file_name }}</p>
-        <p>File Size: {{ file_size }}</p>
-        <p>File Owner Name: {{ file_owner_name }}</p>
-        <p>Last Modification Time: {{ last_modification_time }}</p>
+        {% if data_type == 'folder' %}
+            <p>Folder Owner: {{ folder_owner }}</p>
+            <p>Folder Name: {{ folder_name }}</p>
+            <p>Folder Size: {{ folder_size }}</p>
+            <p>Folder Updated: {{ folder_modified_at }}</p>
+            {% for x in file_lists %}
+                <ul>
+                    <li>File ID: {{ x.folder_file_id }}</li>
+                    <li>File Name: {{ x.folder_file_name }}</li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <p>User Name: {{ user_name }}</p>
+            <p>File Name: {{ file_name }}</p>
+            <p>File Size: {{ file_size }}</p>
+            <p>File Owner Name: {{ file_owner_name }}</p>
+            <p>Last Modification Time: {{ last_modification_time }}</p>
+        {% endif %}
     </div>
 </body>
 </html>
