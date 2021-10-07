@@ -7,7 +7,7 @@
     <div id="container">
         {% if data_type == 'folder' %}
             <p>Folder Owner: {{ folder_owner }}</p>
-            <p id="folder_id">Folder ID: <span>{{ folder_id }}</span></p>
+            <p>Folder ID: <span id="folder_id">{{ folder_id }}</span></p>
             <p>Folder Name: {{ folder_name }}</p>
             <p>Folder Size: {{ folder_size }}</p>
             <p>Folder Updated: {{ folder_modified_at }}</p>
@@ -34,8 +34,7 @@
 <script src="/static/js/jquery/jquery.js"></script>
 <script>
     $('#folder_download').click(function (){
-        const p = document.getElementById('folder_id')
-        const folder_id = p.getElementsByTagName('span')
+        const folder_id = document.getElementById('folder_id').textContent
         console.log(folder_id);
         $.post('/api/folder_download/',
             {
