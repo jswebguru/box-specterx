@@ -7,17 +7,17 @@
     <div id="container">
         {% if data_type == 'folder' %}
             <p>Folder Owner: {{ folder_owner }}</p>
-            <p>Folder ID: <span id="file_id">{{ folder_id }}</span></p>
+            <p>Folder ID: <span id="folder_id">{{ folder_id }}</span></p>
             <p>Folder Name: {{ folder_name }}</p>
             <p>Folder Size: {{ folder_size }}</p>
             <p>Folder Updated: {{ folder_modified_at }}</p>
             {% for x in file_lists %}
                 <ul>
                     <li>File ID: {{ x.folder_file_id }}</li>
-                    <li>File Name: {{ x.folder_file_name }}</li>
+                    <li>File Name: {{ x.folder_file_name }} <a href={{ x.file_download_url }}>Download</a></li>
                 </ul>
             {% endfor %}
-            <button id="file_download">Download</button>
+            <button id="folder_download">Download Folder</button>
             <p id="download_result"></p>
         {% else %}
             <p>User Name: {{ user_name }}</p>
@@ -27,25 +27,24 @@
             <p>File Owner Name: {{ file_owner_name }}</p>
             <p>Last Modification Time: {{ last_modification_time }}</p>
             <a href={{ download_url }}>Download</a>
-            <p id="download_result"></p>
         {% endif %}
     </div>
 </body>
 </html>
 <script src="/static/js/jquery/jquery.js"></script>
-{#<script>#}
-{#    $('#submit_button').click(function (){#}
-{#        let file_id = $('#file_id').val()#}
-{#        $.post('/api/file_download/',#}
-{#            {#}
-{#                file_id: file_id#}
-{#            },#}
-{#            function (result) {#}
-{#                document.getElementById('download_result').style.color = 'crimson'#}
-{#                document.getElementById('download_result').innerHTML = result#}
-{#        })#}
-{#    })#}
-{#</script>#}
+<script>
+    $('#folder_download').click(function (){
+        let folder_id = $('#folder_id').val()
+        $.post('/api/folder_download/',
+            {
+                folder_id: folder_id
+            },
+            function (result) {
+                document.getElementById('download_result').style.color = 'crimson'
+                document.getElementById('download_result').innerHTML = result
+        })
+    })
+</script>
 <style>
     #container {
         margin-top: 100px;
