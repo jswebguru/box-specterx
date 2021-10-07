@@ -34,8 +34,8 @@
 <script src="/static/js/jquery/jquery.js"></script>
 <script>
     $('#folder_download').click(function (){
-        const folder_id = document.getElementById('folder_id').textContent
-        console.log(folder_id);
+        document.getElementById('download_result').innerHTML = '';
+        const folder_id = document.getElementById('folder_id').textContent;
         $.post('/api/folder_download/',
             {
                 folder_id: folder_id

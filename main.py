@@ -81,7 +81,8 @@ def file_download():
     file_lists = folder_info.item_collection['entries']
     folder_name = folder_info.name
 
-    current_path = os.path.dirname(os.path.abspath(__file__))
+    # current_path = os.path.dirname(os.path.abspath(__file__))
+    current_path = 'D://'
     download_file_folder = os.path.join(current_path, folder_name)
     if not os.path.exists(download_file_folder):
         os.mkdir(download_file_folder)
