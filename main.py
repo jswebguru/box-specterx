@@ -11,11 +11,7 @@ def get_meta_data():
     user_name = request.form['user_name']
     file_id = request.form['file_id']
 
-    auth = OAuth2(
-        client_id=CLIENT_ID,
-        client_secret=CLIENT_SECRET,
-        access_token=DEVELOPER_TOKEN,
-    )
+    auth = OAuth2(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, access_token=DEVELOPER_TOKEN)
     client = Client(auth)
 
     try:
@@ -25,15 +21,18 @@ def get_meta_data():
         file_size = file_info.size
         last_modification_time = file_info.modified_at
         file_owner_name = file_info.owned_by.name
+        download_url = client.file(file_id).get_download_url()
 
         return render_template(
             'home.html',
             data_type=data_type,
             user_name=user_name,
+            file_id=file_id,
             file_name=file_name,
             file_size=file_size,
             file_owner_name=file_owner_name,
             last_modification_time=last_modification_time,
+            download_url=download_url
         )
     except BoxAPIException as e:
         status = e.status
@@ -55,6 +54,7 @@ def get_meta_data():
             return render_template(
                 'home.html',
                 data_type=data_type,
+                folder_id=file_id,
                 folder_owner=folder_owner,
                 folder_name=folder_name,
                 folder_size=folder_size,
@@ -63,6 +63,20 @@ def get_meta_data():
     except Exception as e:
         print(e)
 
+
+@app.route('/api/file_download/', methods=['POST'])
+def file_download():
+    file_id = request.form['file_id']
+
+    auth = OAuth2(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, access_token=DEVELOPER_TOKEN)
+    client = Client(auth)
+
+    file_content = client.file(file_id).content()
+    print(file_content)
+
+    result = 'Successfully Downloaded!'
+
+    return result
 
 
 if __name__ == '__main__':
