@@ -3,6 +3,8 @@ import requests
 
 app = Flask(__name__)
 
+result = []
+
 
 @app.route("/")
 def hello():
@@ -11,10 +13,6 @@ def hello():
 
 @app.route("/api/get_data/", methods=['POST'])
 def get_result():
-    file_id = '123456'
-    user_id = '456789'
-
-    result = {'file_id': file_id, 'user_id': user_id}
 
     return result
 
@@ -24,9 +22,7 @@ def get_meta_data():
     user_id = requests.get('user_id')
     file_id = requests.get('file_ids')
 
-    result = {'file_id': file_id, 'user_id': user_id}
-
-    return result
+    result.append({'file_id': file_id, 'user_id': user_id})
 
 
 # if __name__ == '__main__':
